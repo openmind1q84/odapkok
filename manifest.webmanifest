@@ -1,0 +1,20 @@
+{
+  "name": "오답 콕콕 - 오답노트·시험지 만들기",
+  "short_name": "오답 콕콕",
+  "description": "틀린 문제 사진·캡처를 올리면 오답노트나 시험지로 자동 배열해 Word·PDF로 만들어 주는 앱",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "lang": "ko",
+  "dir": "ltr",
+  "background_color": "#f4f5f8",
+  "theme_color": "#2f5bea",
+  "categories": ["education", "productivity"],
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

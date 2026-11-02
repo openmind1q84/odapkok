@@ -4,7 +4,13 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>오답 콕콕 · 틀린 문제로 오답노트·시험지 만들기</title>
-<meta name="description" content="찍거나 캡처한 문제 사진을 Word 시험지·오답노트로 자동 배열해 내려받는 도구">
+<meta name="description" content="틀린 문제 사진·캡처를 오답노트나 시험지로 자동 배열해 Word·PDF로 만들어 주는 무료 앱">
+<meta name="theme-color" content="#2f5bea">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/favicon-64.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="오답 콕콕">
 <style>
   :root{
     --bg:#f4f5f8; --card:#fff; --ink:#1d2433; --sub:#6a7286; --line:#e2e5ec;
@@ -22,7 +28,9 @@
   header.top h1{margin:0;font-size:24px;letter-spacing:-.5px}
   header.top p{margin:0;color:var(--sub);font-size:14px}
   .layout{display:grid;grid-template-columns:minmax(320px,430px) 1fr;gap:18px;align-items:start}
-  @media (max-width:900px){.layout{grid-template-columns:1fr}}
+  .layout > div{min-width:0}
+  @media (max-width:900px){.layout{grid-template-columns:minmax(0,1fr)}}
+  #pages .page{transform-origin:top center}
   .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;margin-bottom:16px}
   .card h2{font-size:16px;margin:0 0 12px;display:flex;align-items:center;gap:8px}
   .card h2 .step{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;
@@ -109,6 +117,7 @@
   .page .notes .ck{height:6mm;line-height:6mm;color:#333}
   .page .notes .ln{height:7mm;border-bottom:.25mm solid #999}
 
+  footer.made a{color:inherit}
   footer.made{position:fixed;right:12px;bottom:8px;font-size:12px;color:#8a91a3;background:rgba(255,255,255,.85);
               padding:3px 9px;border-radius:999px;border:1px solid var(--line);z-index:5}
 
@@ -123,6 +132,15 @@
   .crop-rect{position:absolute;border:2px solid #2f5bea;box-shadow:0 0 0 9999px rgba(0,0,0,.45);pointer-events:none}
   .modal .acts{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}
 
+  @media (max-width:600px){
+    footer.made{position:static;display:block;width:max-content;margin:0 auto 18px}
+    .thumbs{grid-template-columns:repeat(2,minmax(0,1fr))}
+    .thumb .imgbox{height:110px}.thumb .imgbox img{max-height:110px}
+    .thumb .tools{display:grid;grid-template-columns:repeat(3,1fr);border-top:0}
+    .thumb .tools button{padding:9px 0;font-size:16px;border-top:1px solid var(--line)}
+    .thumb .tools button:nth-child(1){order:4}.thumb .tools button:nth-child(2){order:1}.thumb .tools button:nth-child(3){order:2}
+    .thumb .tools button:nth-child(4){order:3}.thumb .tools button:nth-child(5){order:5}.thumb .tools button:nth-child(6){order:6}
+  }
   .toast{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);background:#1d2433;color:#fff;padding:10px 16px;
          border-radius:10px;font-size:14px;opacity:0;pointer-events:none;transition:.2s;z-index:60;max-width:90vw;text-align:center}
   .toast.on{opacity:1}
@@ -261,7 +279,7 @@
 </div>
 
 <div class="toast" id="toast"></div>
-<footer class="made">made by JYP</footer>
+<footer class="made"><a href="privacy.html">개인정보처리방침</a> · made by JYP</footer>
 
 <script>
 (() => {
@@ -984,6 +1002,7 @@ document.addEventListener('paste', e => {
 });
 
 renderThumbs(); renderPreview();
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(()=>{});
 window.__app = { addFiles, buildDocx, buildPdf, items:()=>items, S:()=>S }; // 테스트용
 })();
 </script>
