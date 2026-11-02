@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>문제 모아 Word로 · 오답노트 · 시험지 만들기</title>
+<title>오답 콕콕 · 틀린 문제로 오답노트·시험지 만들기</title>
 <meta name="description" content="찍거나 캡처한 문제 사진을 Word 시험지·오답노트로 자동 배열해 내려받는 도구">
 <style>
   :root{
@@ -142,8 +142,8 @@
 <body>
 <div class="wrap">
   <header class="top">
-    <h1>📄 문제 모아 Word로</h1>
-    <p>틀린 문제 사진·캡처를 올리면 시험지나 오답노트 Word 파일로 자동 배열해 드려요.</p>
+    <h1>📌 오답 콕콕</h1>
+    <p>틀린 문제 사진·캡처를 올리면 오답노트나 시험지로 자동 배열해 Word·PDF로 드려요.</p>
   </header>
 
   <div class="layout">
@@ -759,7 +759,7 @@ async function buildDocx(){
     `<Relationship Id="rId2" Type="http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties" Target="docProps/core.xml"/></Relationships>`);
   const now = new Date().toISOString().replace(/\.\d+Z$/,'Z');
   add('docProps/core.xml', `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><cp:coreProperties xmlns:cp="http://schemas.openxmlformats.org/package/2006/metadata/core-properties" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">`+
-    `<dc:title>${esc((S.subject||'')+' '+modeName())}</dc:title><dc:creator>문제 모아 Word로</dc:creator><dcterms:created xsi:type="dcterms:W3CDTF">${now}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">${now}</dcterms:modified></cp:coreProperties>`);
+    `<dc:title>${esc((S.subject||'')+' '+modeName())}</dc:title><dc:creator>오답 콕콕</dc:creator><dcterms:created xsi:type="dcterms:W3CDTF">${now}</dcterms:created><dcterms:modified xsi:type="dcterms:W3CDTF">${now}</dcterms:modified></cp:coreProperties>`);
   let rels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">`+
     `<Relationship Id="rIdStyles" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>`+
     `<Relationship Id="rIdSettings" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/settings" Target="settings.xml"/>`+
